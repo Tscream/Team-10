@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Marco
+  - Keyx
+  - Luc
+  - Pieter
+  - Kenny
+  - Robin
+  - Noor
+  - Frans
+  - Gloria
+  - David
+  - Gaby
   layers:
   - Default
   - TransparentFX
