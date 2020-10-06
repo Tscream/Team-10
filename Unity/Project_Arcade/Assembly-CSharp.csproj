@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scrips\Luuk\Npc.cs" />
     <Compile Include="Assets\Movement_test.cs" />
+    <Compile Include="Assets\Scrips\Luuk\Npc2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
