@@ -24,6 +24,7 @@ public class _AI : MonoBehaviour
         {
             aiAnim.SetBool("Idle", false);
             aiAnim.SetBool("Walk", true);
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 
         if (Vector3.Distance(player.transform.position, transform.position) <= 0.1f && aiAnim.GetBool("Walk") == true)

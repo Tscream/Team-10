@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementTest : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public float speed;
 
@@ -19,11 +19,11 @@ public class MovementTest : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical") * speed;
 
         transform.Translate(horizontalInput * Time.deltaTime, verticalInput * Time.deltaTime, 0);
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -4.67f, 0), transform.position.z);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -4.9f, -0.3f), transform.position.z);
 
-        float y = transform.position.y -4;
+        float y = transform.position.y;
 
-        float scale = 2 + (1 / 4.67f) * y;
+        float scale = 2 + (1 / 4.9f) * -y;
 
         transform.localScale = new Vector3(scale, scale, scale);
 
