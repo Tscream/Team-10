@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Movement_test : MonoBehaviour
+public class MovementTest : MonoBehaviour
 {
 
     public float speed;
