@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Team_10.unity
+- path: Assets/Scenes/Luuk_Test.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
