@@ -23,7 +23,7 @@ public class MovementTest : MonoBehaviour
 
         float y = transform.position.y -4;
 
-        float scale = -y / 2;
+        float scale = 2 + (1 / 4.67f) * y;
 
         transform.localScale = new Vector3(scale, scale, scale);
 

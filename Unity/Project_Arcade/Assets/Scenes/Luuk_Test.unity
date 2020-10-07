@@ -226,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963124425}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.86, y: 0, z: 0}
+  m_LocalPosition: {x: -5.95, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -260,14 +260,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1169264319}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 975ebb7c9ceff5d449dd116fc0b4b8ef, type: 3}
+  m_Script: {fileID: 11500000, guid: c3ad08e819594524390561a8f218999a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idle: 0
-  attack: 0
-  weak: 0
-  retreat: 0
-  player: {fileID: 963124425}
 --- !u!61 &1169264321
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -353,7 +348,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1169264319}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.21, y: 0, z: 0}
+  m_LocalPosition: {x: 6.31, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
