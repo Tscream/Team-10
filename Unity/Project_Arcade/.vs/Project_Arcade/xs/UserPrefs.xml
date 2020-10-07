@@ -1,7 +1,9 @@
 ﻿<Properties StartupConfiguration="{0ED1991F-CA79-6634-5717-46C890150A50}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Tijdelijk/Movement_test.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Tijdelijk/MovementTest.cs">
     <Files>
-      <File FileName="Assets/Tijdelijk/Movement_test.cs" Line="1" Column="1" />
+      <File FileName="Assets/Tijdelijk/MovementTest.cs" Line="28" Column="65" />
+      <File FileName="Assets/Scripts/Luuk/Npc2.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Luuk/Npc.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,7 +14,7 @@
                 <Node name="Luuk" expanded="True" />
               </Node>
               <Node name="Tijdelijk" expanded="True">
-                <Node name="Movement_test.cs" selected="True" />
+                <Node name="MovementTest.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -22,7 +24,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="40b279f5-7d1d-40b0-8758-9fd8847f6d0a" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="f682aadd-8606-4e0c-9bda-e5176d50bad6" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
