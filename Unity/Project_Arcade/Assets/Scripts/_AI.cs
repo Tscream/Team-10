@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class _AI : MonoBehaviour
 {
@@ -8,8 +10,11 @@ public class _AI : MonoBehaviour
     GameObject player;
     private float loop_cooldown;
     private bool retreat;
-    public bool followY;
-    public bool follow_Y;
+    private bool followY;
+    private bool follow_Y;
+    public int maxHealth = 6;
+    public int currentHealth;
+    public Healthbar healthbar;
     
     // Start is called before the first frame update
     void Start()
@@ -17,6 +22,7 @@ public class _AI : MonoBehaviour
         aiAnim = gameObject.GetComponent<Animator>();
         player = GameObject.Find("Player");
         loop_cooldown = 2f;
+        currentHealth = maxHealth;
         
         
         
@@ -25,8 +31,9 @@ public class _AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= 10)  //&& aiAnim.GetBool("Idle") == true) 
+        if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 2.01f) //&& aiAnim.GetBool("Idle") == true) 
         {
+            Debug.Log("Walk");
             aiAnim.SetBool("Idle", false);
             aiAnim.SetBool("Walk", true);
             //transform.position = (new Vector3(transform.position.x, otherTransform.position.y, transform.position.z));
@@ -44,6 +51,8 @@ public class _AI : MonoBehaviour
             }
 
 
+            
+
             if(followY == true) // de ai is lager dan de speler in het scherm
             {
                 transform.Translate(0, 0.01f, 0);
@@ -54,7 +63,7 @@ public class _AI : MonoBehaviour
             }
 
 
-            if (aiAnim.GetBool("Attack") == false && aiAnim.GetBool("Walk") == true) 
+            if (aiAnim.GetBool("Attack") == false && aiAnim.GetBool("Walk") == true) //de movement om naar de speler toe te komen
             {
                 transform.Translate(-0.01f, 0, 0);
             }
@@ -63,7 +72,7 @@ public class _AI : MonoBehaviour
 
         if (Vector3.Distance(player.transform.position, transform.position) <= 2 && aiAnim.GetBool("Walk") == true) // als die eenmaal bij de speler is en wilt aanvallen.
         {
-
+            Debug.Log("Attack");
             aiAnim.SetBool("Walk", false);
             aiAnim.SetBool("Attack", true);
         } 
@@ -79,7 +88,13 @@ public class _AI : MonoBehaviour
         {
             
             aiAnim.SetBool("Attack", false); // de ai raakt de speler met zijn aanval
+            //TakeDamage(1);  //deze moet van de // af als de attack functie van de ai werkt en het testje hieronder moet dan juist // worden.
             Retreat();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) // testje voor de healthbar
+        {
+            TakeDamage(1);
         }
 
         if(aiAnim.GetBool("Weak") == true)
@@ -109,9 +124,16 @@ public class _AI : MonoBehaviour
         
     }
 
+
+    void TakeDamage(int damage) // dit is voor de healthbar van de speler. Dit staat in dit script zodat het makkelijk doorgevoerd kan worden naar de healthbar die boven staat. Er komen nog losse healthbars voor de AI.
+    {
+        currentHealth -= damage;
+        healthbar.SetHealth(currentHealth);
+    }
+
     private void FixedUpdate()
     {
-        float y = transform.position.y;
+        float y = transform.position.y; // dezelfde AI scaling als de speler heeft zodat die niet de enige is die groter en kleiner wordt.
 
         float scale = 2 + (1 / 4.9f) * -y;
 

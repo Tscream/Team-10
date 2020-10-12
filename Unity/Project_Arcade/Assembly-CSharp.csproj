@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\_AI.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Healthbar.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
