@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
-
+    Animator Planim;
     
 
     // Start is called before the first frame update
