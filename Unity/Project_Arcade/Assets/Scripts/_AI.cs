@@ -9,6 +9,7 @@ public class _AI : MonoBehaviour
     Animator aiAnim;
     GameObject player;
     private float loop_cooldown;
+    private bool done;
     private bool retreat;
     public int maxHealth = 4;
     public int currentHealth;
@@ -29,7 +30,7 @@ public class _AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 2) //&& aiAnim.GetBool("Idle") == true) 
+        if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 3 && retreat != true) //&& aiAnim.GetBool("Idle") == true) 
         {
             
             aiAnim.SetBool("Idle", false);
@@ -38,35 +39,35 @@ public class _AI : MonoBehaviour
         }
 
 
-        if (aiAnim.GetBool("Walk") == true ) //de movement om naar de speler toe te komen
+        if (aiAnim.GetBool("Walk") == true ) 
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 3f * Time.deltaTime);
             Debug.Log("feest");
         }
 
-        if (Vector3.Distance(player.transform.position, transform.position) <= 2 && aiAnim.GetBool("Walk") == true) // als die eenmaal bij de speler is en wilt aanvallen.
+        if (Vector3.Distance(player.transform.position, transform.position) < 2)// && aiAnim.GetBool("Walk") == true)
         {
-            Debug.Log("Attack");
             aiAnim.SetBool("Walk", false);
             aiAnim.SetBool("Attack", true);
         } 
 
-        if (aiAnim.GetBool("Attack") == true && Input.GetKey(KeyCode.R)) // de speler verdedigd en zo komt de ai open voor een tegenaanval
+        if (aiAnim.GetBool("Attack") == true && Input.GetKey(KeyCode.R)) 
         {
             
             aiAnim.SetBool("Attack", false);
             aiAnim.SetBool("Weak", true);
         } 
 
-        if(aiAnim.GetBool("Attack") == true)
+        if(aiAnim.GetBool("Attack") == true && done == false)
         {
-            
-            //aiAnim.SetBool("Attack", false); // de ai raakt de speler met zijn aanval
-            //TakeDamage(1);  //deze moet van de // af als de attack functie van de ai werkt en het testje hieronder moet dan juist // worden.
-            Retreat();
+            Debug.Log("Attack");
+            aiAnim.SetBool("Attack", false); 
+            TakeDamage(1);
+            Invoke("Retreat", 1f);
+            done = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) // testje voor de healthbar
+        if (Input.GetKeyDown(KeyCode.Space)) 
         {
             TakeDamage(1);
         }
@@ -75,32 +76,46 @@ public class _AI : MonoBehaviour
         {
             Invoke("Retreat", 1f);
         }
-   
-        if(retreat == true)
+
+        if (retreat == true)
         {
-            transform.Translate(0.01f, 0, 0);
-            if (Time.time >= loop_cooldown)
+            if(Vector3.Distance(transform.position, player.transform.position) > 8)
             {
-                aiAnim.SetBool("Walk", true);
                 retreat = false;
+                aiAnim.SetBool("Walk", true);
             }
+            else
+            {
+                transform.Translate(0.1f, 0, 0);
+                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            }
+
         }
-       
+
     }
 
 
     void Retreat()
     {
-        //retreat
-        aiAnim.SetBool("Weak", false);
+        Debug.Log("retreat");
         retreat = true;
-       // aiAnim.SetBool("Walk", true);
+        
+
+        //done = false;
+
+        //aiAnim.SetBool("Weak", false);
+        // aiAnim.SetBool("Walk", true);
+
+
+
+        
+        
 
         
     }
 
 
-    void TakeDamage(int damage) // dit is voor de healthbar van de speler. Dit staat in dit script zodat het makkelijk doorgevoerd kan worden naar de healthbar die boven staat. Er komen nog losse healthbars voor de AI.
+    void TakeDamage(int damage) 
     {
         currentHealth -= damage;
         healthbar.SetHealth(currentHealth);
@@ -108,7 +123,7 @@ public class _AI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float y = transform.position.y; // dezelfde AI scaling als de speler heeft zodat die niet de enige is die groter en kleiner wordt.
+        float y = transform.position.y;
 
         float scale = 2 + (1 / 4.9f) * -y;
 
