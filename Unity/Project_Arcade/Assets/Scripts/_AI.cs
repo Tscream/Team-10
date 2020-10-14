@@ -8,19 +8,20 @@ public class _AI : MonoBehaviour
 {
     Animator aiAnim;
     GameObject player;
-    private float loop_cooldown;
-    private bool done;
+    private float cooldown;
+    private bool done_Attack;
+    private bool done_Retreat;
     private bool retreat;
     public int maxHealth = 4;
     public int currentHealth;
     public Healthbar healthbar;
+    float speed = 3f;
     
     // Start is called before the first frame update
     void Start()
     {
         aiAnim = gameObject.GetComponent<Animator>();
         player = GameObject.Find("Player");
-        loop_cooldown = 2f;
         currentHealth = maxHealth;
         
         
@@ -30,22 +31,22 @@ public class _AI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 3 && retreat != true) //&& aiAnim.GetBool("Idle") == true) 
+        if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 3 && aiAnim.GetBool("Retreat") != true) //&& aiAnim.GetBool("Idle") == true) 
         {
             
             aiAnim.SetBool("Idle", false);
             aiAnim.SetBool("Walk", true);
+            done_Retreat = false;
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 
 
         if (aiAnim.GetBool("Walk") == true ) 
         {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, 3f * Time.deltaTime);
-            Debug.Log("feest");
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
 
-        if (Vector3.Distance(player.transform.position, transform.position) < 2)// && aiAnim.GetBool("Walk") == true)
+        if (Vector3.Distance(player.transform.position, transform.position) < 2 && aiAnim.GetBool("Retreat") == false)
         {
             aiAnim.SetBool("Walk", false);
             aiAnim.SetBool("Attack", true);
@@ -58,13 +59,12 @@ public class _AI : MonoBehaviour
             aiAnim.SetBool("Weak", true);
         } 
 
-        if(aiAnim.GetBool("Attack") == true && done == false)
+        if(aiAnim.GetBool("Attack") == true && done_Attack == false)
         {
-            Debug.Log("Attack");
             aiAnim.SetBool("Attack", false); 
             TakeDamage(1);
             Invoke("Retreat", 1f);
-            done = true;
+            done_Attack = true;
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) 
@@ -79,41 +79,48 @@ public class _AI : MonoBehaviour
 
         if (retreat == true)
         {
-            if(Vector3.Distance(transform.position, player.transform.position) > 8)
+            if (Vector3.Distance(transform.position, player.transform.position) > 8)
             {
-                retreat = false;
-                aiAnim.SetBool("Walk", true);
+
+                if(done_Retreat == false)
+                {
+                    cooldown = Time.time + 1f;
+                    done_Retreat = true;
+                    aiAnim.SetBool("Idle", true);
+                }
+
+                Debug.Log("feest");
+                Debug.Log(cooldown);
+
+                if (Time.time >= cooldown)
+                {
+                    Debug.Log("Walk");
+                    //aiAnim.SetBool("Idle", true);
+                    retreat = false;
+                    aiAnim.SetBool("Retreat", false);
+                }
+
             }
             else
             {
-                transform.Translate(0.1f, 0, 0);
+                transform.Translate(speed * Time.deltaTime, 0, 0);
                 gameObject.GetComponent<SpriteRenderer>().flipX = false;
             }
-
         }
-
     }
-
 
     void Retreat()
     {
-        Debug.Log("retreat");
         retreat = true;
-        
+        done_Attack = false;
+        aiAnim.SetBool("Retreat", true);
+        aiAnim.SetBool("Attack", false);        
 
-        //done = false;
+        //done_Attack = false;
 
         //aiAnim.SetBool("Weak", false);
         // aiAnim.SetBool("Walk", true);
-
-
-
-        
-        
-
-        
     }
-
 
     void TakeDamage(int damage) 
     {
