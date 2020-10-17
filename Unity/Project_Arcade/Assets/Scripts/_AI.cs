@@ -33,7 +33,6 @@ public class _AI : MonoBehaviour
     {
         if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 3 && aiAnim.GetBool("Retreat") != true) //&& aiAnim.GetBool("Idle") == true) 
         {
-            Debug.Log("geen feest");
             aiAnim.SetBool("Idle", false);
             aiAnim.SetBool("Walk", true);
             done_Retreat = false;
@@ -46,9 +45,9 @@ public class _AI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
 
+
         if (Vector3.Distance(player.transform.position, transform.position) < 2 && aiAnim.GetBool("Retreat") == false)
         {
-            Debug.Log("werk godverdomme");
             aiAnim.SetBool("Walk", false);
             aiAnim.SetBool("Attack", true);
         } 
