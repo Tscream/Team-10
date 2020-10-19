@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1035
   m_ShowMode: 4
-  m_Title: Animator
+  m_Title: Game
   m_RootView: {fileID: 5}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 303, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 227
+  controlID: 52
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -153,7 +153,7 @@ MonoBehaviour:
   m_LoadedToolbars:
   - {fileID: 24}
   m_MainToolbar: {fileID: 24}
-  m_LastLoadedLayoutName: Home
+  m_LastLoadedLayoutName: 
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_MinSize: {x: 579, y: 563}
   m_MaxSize: {x: 12004, y: 12063}
   vertical: 1
-  controlID: 295
+  controlID: 137
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 579, y: 442}
   m_MaxSize: {x: 12004, y: 8042}
   vertical: 0
-  controlID: 296
+  controlID: 138
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 303, y: 442}
   m_MaxSize: {x: 8003, y: 8042}
   vertical: 1
-  controlID: 297
+  controlID: 139
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_MinSize: {x: 303, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 298
+  controlID: 140
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -439,21 +439,21 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: aa3c0000
       m_LastClickedID: 0
-      m_ExpandedIDs: 42faffff50fbffff7c3c0000
+      m_ExpandedIDs: 5afbffff243c00003e3c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Canvas
+        m_OriginalName: Canvas
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: 15396
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 12}
       m_SearchString: 
@@ -499,9 +499,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.028017163, y: -2.3354347, z: -3.8524053}
+    m_Target: {x: 0.9026802, y: 0.23965418, z: -4.387643}
     speed: 2
-    m_Value: {x: -0.028017163, y: -2.3354347, z: -3.8524053}
+    m_Value: {x: 0.9026802, y: 0.23965418, z: -4.387643}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -552,9 +552,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 3.966518
+    m_Target: 5.8584466
     speed: 2
-    m_Value: 3.966518
+    m_Value: 5.8584466
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -609,14 +609,14 @@ MonoBehaviour:
     - {fileID: 6708801364713512321, guid: 8efa184deb3514878a609b61bc5da402, type: 2}
     - {fileID: 6044047631977858396, guid: f390d5d103b504374b6602128797bc0a, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.393578
+    - e00: 0.48411864
       e01: 0
       e02: 0
-      e03: -4.6789093
+      e03: -145.23557
       e10: 0
-      e11: 0.393578
+      e11: 0.48411864
       e12: 0
-      e13: 67.13761
+      e13: -3.3062134
       e20: 0
       e21: 0
       e22: 1
@@ -625,14 +625,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.34596774
+    - e00: 0.38881803
       e01: 0
       e02: 0
-      e03: -2.2983856
+      e03: -188.61777
       e10: 0
-      e11: 0.34596774
+      e11: 0.38881803
       e12: 0
-      e13: 207.28629
+      e13: 171.6911
       e20: 0
       e21: 0
       e22: 1
@@ -654,7 +654,7 @@ MonoBehaviour:
   m_MiniTool: 0
   m_LockTracker:
     m_IsLocked: 0
-  m_CurrentEditor: 0
+  m_CurrentEditor: 1
   m_LayerEditor:
     m_SelectedLayerIndex: 0
 --- !u!114 &20
@@ -695,21 +695,21 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Animaties/Player
+    - Assets/Animaties/AI/Keyx
     m_Globs: []
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Animaties/Player
+  - Assets/Animaties/AI/Keyx
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/tiyani/Documents/Github/Team-10/Unity/Project_Arcade
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c23d0000
-    m_LastClickedID: 15810
-    m_ExpandedIDs: 000000007a3d00007c3d0000b83d000000ca9a3b
+    m_SelectedIDs: 9c410000
+    m_LastClickedID: 16796
+    m_ExpandedIDs: 000000006c3d00006e3d0000204000005048000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -737,7 +737,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007a3d00007c3d0000
+    m_ExpandedIDs: 000000006c3d00006e3d0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -762,9 +762,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 243c0000
+    m_LastClickedInstanceID: 15396
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000b03c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

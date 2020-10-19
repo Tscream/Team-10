@@ -7,16 +7,13 @@ using UnityEngine.UI;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
-    Animator Planim;
-    
+    Animator plAnim;
 
-    // Start is called before the first frame update
     void Start()
     {
-       
+        plAnim = gameObject.GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float horizontalInput = Input.GetAxis("Horizontal") * speed;
@@ -30,12 +27,19 @@ public class PlayerMovement : MonoBehaviour
         float scale = 2 + (1 / 4.9f) * -y;
 
         transform.localScale = new Vector3(scale, scale, scale);
-
-
-      
-
-       
     }
 
-   
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            plAnim.SetBool("Idle", false);
+            plAnim.SetBool("Defend", true);
+        }
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            plAnim.SetBool("Idle", true);
+            plAnim.SetBool("Defend", false);
+        }
+    }
 }

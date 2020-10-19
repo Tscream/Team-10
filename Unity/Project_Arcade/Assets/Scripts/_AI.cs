@@ -12,26 +12,30 @@ public class _AI : MonoBehaviour
     private bool done_Attack;
     private bool done_Retreat;
     private bool retreat;
-    public int maxHealth = 4;
+    public int maxHealth = 100;
     public int currentHealth;
     public Healthbar healthbar;
     float speed = 3f;
     
-    // Start is called before the first frame update
     void Start()
     {
         aiAnim = gameObject.GetComponent<Animator>();
         player = GameObject.Find("Player");
         currentHealth = maxHealth;
-        
-        
-        
     }
 
-    // Update is called once per frame
+    void FixedUpdate()
+    {
+        float y = transform.position.y;
+
+        float scale = 2 + (1 / 4.9f) * -y;
+
+        transform.localScale = new Vector3(scale, scale, scale);
+    }
+
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 3 && aiAnim.GetBool("Retreat") != true) //&& aiAnim.GetBool("Idle") == true) 
+        if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 3 && aiAnim.GetBool("Retreat") != true) 
         {
             aiAnim.SetBool("Idle", false);
             aiAnim.SetBool("Walk", true);
@@ -39,22 +43,21 @@ public class _AI : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().flipX = true;
         }
 
-
         if (aiAnim.GetBool("Walk") == true ) 
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
 
-
         if (Vector3.Distance(player.transform.position, transform.position) < 2 && aiAnim.GetBool("Retreat") == false)
         {
+            Debug.Log("stop walk");
             aiAnim.SetBool("Walk", false);
             aiAnim.SetBool("Attack", true);
         } 
 
         if (aiAnim.GetBool("Attack") == true && Input.GetKey(KeyCode.R)) 
         {
-            
+            Debug.Log("weak");
             aiAnim.SetBool("Attack", false);
             aiAnim.SetBool("Weak", true);
         } 
@@ -74,7 +77,7 @@ public class _AI : MonoBehaviour
 
         if(aiAnim.GetBool("Weak") == true)
         {
-            Invoke("Retreat", 1f);
+            Invoke("Retreat", 3f);
         }
 
         if (retreat == true)
@@ -89,13 +92,9 @@ public class _AI : MonoBehaviour
                     aiAnim.SetBool("Idle", true);
                 }
 
-                Debug.Log("feest");
-                Debug.Log(cooldown);
 
                 if (Time.time >= cooldown)
                 {
-                    Debug.Log("Walk");
-                    //aiAnim.SetBool("Idle", true);
                     retreat = false;
                     aiAnim.SetBool("Retreat", false);
                 }
@@ -114,12 +113,10 @@ public class _AI : MonoBehaviour
         retreat = true;
         done_Attack = false;
         aiAnim.SetBool("Retreat", true);
-        aiAnim.SetBool("Attack", false);        
-
-        //done_Attack = false;
-
-        //aiAnim.SetBool("Weak", false);
-        // aiAnim.SetBool("Walk", true);
+        aiAnim.SetBool("Weak", false);
+        aiAnim.SetBool("Attack", false);
+        aiAnim.SetBool("Walk", false);
+        aiAnim.SetBool("Idle", false);
     }
 
     void TakeDamage(int damage) 
@@ -127,16 +124,4 @@ public class _AI : MonoBehaviour
         currentHealth -= damage;
         healthbar.SetHealth(currentHealth);
     }
-
-    private void FixedUpdate()
-    {
-        float y = transform.position.y;
-
-        float scale = 2 + (1 / 4.9f) * -y;
-
-        transform.localScale = new Vector3(scale, scale, scale);
-    }
-
-    
-
 }
