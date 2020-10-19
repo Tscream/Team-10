@@ -16,6 +16,7 @@ public class _AI : MonoBehaviour
     public int currentHealth;
     public Healthbar healthbar;
     float speed = 3f;
+    Vector3 oldPlayerPos;
 
     
     void Start()
@@ -32,6 +33,18 @@ public class _AI : MonoBehaviour
         float scale = 2 + (1 / 4.9f) * -y;
 
         transform.localScale = new Vector3(scale, scale, scale);
+
+
+        if(transform.position.x < player.transform.position.x)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+
+
     }
 
     void Update()
@@ -51,20 +64,16 @@ public class _AI : MonoBehaviour
 
         if (Vector3.Distance(player.transform.position, transform.position) < 2 && aiAnim.GetBool("Retreat") == false)
         {
-            Debug.Log("stop walk");
             aiAnim.SetBool("Walk", false);
             aiAnim.SetBool("Attack", true);
-        } 
-
-        if (aiAnim.GetBool("Attack") == true && Input.GetKey(KeyCode.R)) 
-        {
-            Debug.Log("weak");
-            aiAnim.SetBool("Attack", false);
-            aiAnim.SetBool("Weak", true);
-            
         }
 
-        if (aiAnim.GetBool("Attack") == true && done_Attack == false)
+        if (aiAnim.GetBool("Attack") == true && Input.GetKey(KeyCode.R))
+        {
+            aiAnim.SetBool("Weak", true);
+        }
+
+        if (aiAnim.GetBool("Attack") == true && done_Attack == false && aiAnim.GetBool("Weak") == false)
         {
             aiAnim.SetBool("Attack", false);
             TakeDamage(1);
@@ -79,12 +88,12 @@ public class _AI : MonoBehaviour
 
         if(aiAnim.GetBool("Weak") == true)
         {
-            Invoke("Retreat", 3f);
+            Invoke("Retreat", 2f);
         }
 
         if (retreat == true)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) > 8)
+            if (Vector3.Distance(transform.position, oldPlayerPos) > 8)
             {
 
                 if(done_Retreat == false)
@@ -114,6 +123,7 @@ public class _AI : MonoBehaviour
     {
         retreat = true;
         done_Attack = false;
+        oldPlayerPos = player.transform.position;
         aiAnim.SetBool("Retreat", true);
         aiAnim.SetBool("Weak", false);
         aiAnim.SetBool("Attack", false);
