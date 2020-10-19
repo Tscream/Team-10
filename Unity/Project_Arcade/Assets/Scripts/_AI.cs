@@ -16,6 +16,7 @@ public class _AI : MonoBehaviour
     public int currentHealth;
     public Healthbar healthbar;
     float speed = 3f;
+
     
     void Start()
     {
@@ -60,11 +61,12 @@ public class _AI : MonoBehaviour
             Debug.Log("weak");
             aiAnim.SetBool("Attack", false);
             aiAnim.SetBool("Weak", true);
-        } 
+            
+        }
 
-        if(aiAnim.GetBool("Attack") == true && done_Attack == false)
+        if (aiAnim.GetBool("Attack") == true && done_Attack == false)
         {
-            aiAnim.SetBool("Attack", false); 
+            aiAnim.SetBool("Attack", false);
             TakeDamage(1);
             Invoke("Retreat", 1f);
             done_Attack = true;
@@ -115,8 +117,6 @@ public class _AI : MonoBehaviour
         aiAnim.SetBool("Retreat", true);
         aiAnim.SetBool("Weak", false);
         aiAnim.SetBool("Attack", false);
-        aiAnim.SetBool("Walk", false);
-        aiAnim.SetBool("Idle", false);
     }
 
     void TakeDamage(int damage) 
