@@ -10,10 +10,12 @@ public class PlayerMovement : MonoBehaviour
     float horizontalInput;
     float verticalInput;
     Animator plAnim;
+    private SpriteRenderer sr;
 
     void Start()
     {
         plAnim = gameObject.GetComponent<Animator>();
+        sr = gameObject.GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -33,6 +35,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+
+        if (horizontalInput != 0 || verticalInput != 0)
+        {
+            plAnim.SetBool("Idle", false);
+            plAnim.SetBool("Walk", true);
+        }
+        else
+        {
+            plAnim.SetBool("Idle", true);
+            plAnim.SetBool("Walk", false);
+        }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             plAnim.SetBool("Idle", false);
@@ -43,16 +57,18 @@ public class PlayerMovement : MonoBehaviour
             plAnim.SetBool("Idle", true);
             plAnim.SetBool("Defend", false);
         }
-        if(horizontalInput != 0 || verticalInput != 0)
+
+        if(horizontalInput < 0)
         {
-            plAnim.SetBool("Idle", false);
-            plAnim.SetBool("Walk", true);
+            sr.flipX = true;
         }
-        if(horizontalInput == 0 || verticalInput == 0)
+
+        if(horizontalInput > 0)
         {
-            plAnim.SetBool("Idle", true);
-            plAnim.SetBool("Walk", false);
+            sr.flipX = false;
         }
+
+       
 
     }
 }

@@ -81,9 +81,9 @@ public class _AI : MonoBehaviour
             done_Attack = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if(Input.GetKeyDown(KeyCode.Space) && aiAnim.GetBool("Weak") == true)
         {
-            TakeDamage(1);
+
         }
 
         if(aiAnim.GetBool("Weak") == true)
