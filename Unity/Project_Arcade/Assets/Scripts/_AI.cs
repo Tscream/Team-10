@@ -17,6 +17,8 @@ public class _AI : MonoBehaviour
     public Healthbar healthbar;
     float speed = 3f;
     Vector3 oldPlayerPos;
+    public GameObject hp;
+    public GameObject nametag;
 
     
     void Start()
@@ -38,10 +40,16 @@ public class _AI : MonoBehaviour
         if(transform.position.x < player.transform.position.x)
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 180, 0));
+            hp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            hp.transform.localPosition = new Vector3(0.3f, 1.2f, 0);
+            nametag.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
         else
         {
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            hp.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            hp.transform.localPosition = new Vector3(-0.3f, 1.2f, 0);
+            nametag.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
 
 
@@ -81,9 +89,9 @@ public class _AI : MonoBehaviour
             done_Attack = true;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space) && aiAnim.GetBool("Weak") == true)
+        if(aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space))
         {
-
+            //take damage
         }
 
         if(aiAnim.GetBool("Weak") == true)
