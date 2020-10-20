@@ -6,16 +6,20 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed;
+    float speed = 3;
     float horizontalInput;
     float verticalInput;
+    float staminaFill = 1;
+    RectTransform staminaBar;
     Animator plAnim;
-    private SpriteRenderer sr;
+    SpriteRenderer sr;
+
 
     void Start()
     {
         plAnim = gameObject.GetComponent<Animator>();
         sr = gameObject.GetComponent<SpriteRenderer>();
+        staminaBar = GameObject.Find("Canvas/Staminabar/Fill").GetComponent<RectTransform>();
     }
 
     void FixedUpdate()
@@ -47,17 +51,6 @@ public class PlayerMovement : MonoBehaviour
             plAnim.SetBool("Walk", false);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            plAnim.SetBool("Idle", false);
-            plAnim.SetBool("Defend", true);
-        }
-        if (Input.GetKeyUp(KeyCode.R))
-        {
-            plAnim.SetBool("Idle", true);
-            plAnim.SetBool("Defend", false);
-        }
-
         if(horizontalInput < 0)
         {
             sr.flipX = true;
@@ -68,7 +61,46 @@ public class PlayerMovement : MonoBehaviour
             sr.flipX = false;
         }
 
-       
+        if (Input.GetKey(KeyCode.R) && staminaFill > 0)
+        {
+            staminaFill -= 0.1f * Time.deltaTime;
+        }
+        else if (staminaFill < 1)
+        {
+            staminaFill += 0.05f * Time.deltaTime;
+
+            Debug.Log(staminaFill);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R) && staminaFill > 0)
+        {
+            plAnim.SetBool("Idle", false);
+            plAnim.SetBool("Defend", true);
+
+            
+
+        }
+        if (Input.GetKeyUp(KeyCode.R))
+        {
+            plAnim.SetBool("Idle", true);
+            plAnim.SetBool("Defend", false);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            plAnim.SetBool("Idle", false);
+            plAnim.SetBool("Defend", false);
+            plAnim.SetBool("Attack", true);
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            plAnim.SetBool("Idle", true);
+            plAnim.SetBool("Defend", false);
+            plAnim.SetBool("Attack", false);
+        }
+
+        staminaBar.localScale = new Vector3(staminaFill, 1, 1);
+
 
     }
 }

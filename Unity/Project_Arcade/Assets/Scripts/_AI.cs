@@ -8,23 +8,26 @@ public class _AI : MonoBehaviour
 {
     Animator aiAnim;
     GameObject player;
-    private float cooldown;
-    private bool done_Attack;
-    private bool done_Retreat;
-    private bool retreat;
-    public int maxHealth = 100;
-    public int currentHealth;
-    public Healthbar healthbar;
-    float speed = 3f;
+    GameObject hp;
+    GameObject nametag;
+    Healthbar playerHealth;
     Vector3 oldPlayerPos;
-    public GameObject hp;
-    public GameObject nametag;
-
-    
+    int maxHealth = 10;
+    int currentHealth;
+    float speed = 3f;
+    float cooldown;
+    float healthFill = 0.6f;
+    bool done_Attack;
+    bool done_Retreat;
+    bool retreat;
+ 
     void Start()
     {
         aiAnim = gameObject.GetComponent<Animator>();
         player = GameObject.Find("Player");
+        hp = gameObject.transform.Find("Fill").gameObject;
+        nametag = gameObject.transform.Find("Nametag").gameObject;
+        playerHealth = GameObject.Find("Canvas/Healthbar").GetComponent<Healthbar>();
         currentHealth = maxHealth;
     }
 
@@ -35,7 +38,6 @@ public class _AI : MonoBehaviour
         float scale = 2 + (1 / 4.9f) * -y;
 
         transform.localScale = new Vector3(scale, scale, scale);
-
 
         if(transform.position.x < player.transform.position.x)
         {
@@ -51,8 +53,6 @@ public class _AI : MonoBehaviour
             hp.transform.localPosition = new Vector3(-0.3f, 1.2f, 0);
             nametag.GetComponent<RectTransform>().rotation = Quaternion.Euler(new Vector3(0, 0, 0));
         }
-
-
     }
 
     void Update()
@@ -91,19 +91,18 @@ public class _AI : MonoBehaviour
 
         if(aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space))
         {
-            //take damage
+            healthFill -= 0.1f;
         }
 
         if(aiAnim.GetBool("Weak") == true)
         {
-            Invoke("Retreat", 2f);
+            Invoke("Retreat", 3f);
         }
 
         if (retreat == true)
         {
             if (Vector3.Distance(transform.position, oldPlayerPos) > 8)
             {
-
                 if(done_Retreat == false)
                 {
                     cooldown = Time.time + 1f;
@@ -111,19 +110,28 @@ public class _AI : MonoBehaviour
                     aiAnim.SetBool("Idle", true);
                 }
 
-
                 if (Time.time >= cooldown)
                 {
                     retreat = false;
                     aiAnim.SetBool("Retreat", false);
                 }
-
             }
             else
             {
                 transform.Translate(speed * Time.deltaTime, 0, 0);
                 gameObject.GetComponent<SpriteRenderer>().flipX = false;
             }
+        }
+
+        hp.transform.localScale = new Vector3(healthFill, 0.05f, 1);
+
+        if(transform.position.y > player.transform.position.y)
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = -1; 
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
     }
 
@@ -140,6 +148,6 @@ public class _AI : MonoBehaviour
     void TakeDamage(int damage) 
     {
         currentHealth -= damage;
-        healthbar.SetHealth(currentHealth);
+        playerHealth.SetHealth(currentHealth);
     }
 }
