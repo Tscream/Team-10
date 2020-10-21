@@ -76,7 +76,7 @@ public class _AI : MonoBehaviour
             aiAnim.SetBool("Attack", true);
         }
 
-        if (aiAnim.GetBool("Attack") == true && Input.GetKey(KeyCode.R))
+        if (aiAnim.GetBool("Attack") == true && Input.GetKey(KeyCode.R) && PlayerMovement.staminaFill > 0.01f)
         {
             aiAnim.SetBool("Weak", true);
         }
@@ -85,11 +85,13 @@ public class _AI : MonoBehaviour
         {
             aiAnim.SetBool("Attack", false);
             TakeDamage(1);
+            oldPlayerPos = player.transform.position;
             Invoke("Retreat", 1f);
             done_Attack = true;
+            Debug.Log(oldPlayerPos);
         }
 
-        if(aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space))
+        if (aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space))
         {
             healthFill -= 0.1f;
         }
@@ -101,6 +103,8 @@ public class _AI : MonoBehaviour
 
         if (retreat == true)
         {
+
+
             if (Vector3.Distance(transform.position, oldPlayerPos) > 8)
             {
                 if(done_Retreat == false)
@@ -110,6 +114,8 @@ public class _AI : MonoBehaviour
                     aiAnim.SetBool("Idle", true);
                 }
 
+                Debug.Log("feest");
+
                 if (Time.time >= cooldown)
                 {
                     retreat = false;
@@ -118,6 +124,9 @@ public class _AI : MonoBehaviour
             }
             else
             {
+                Debug.Log("fuifje");
+
+
                 transform.Translate(speed * Time.deltaTime, 0, 0);
                 gameObject.GetComponent<SpriteRenderer>().flipX = false;
             }
@@ -139,7 +148,6 @@ public class _AI : MonoBehaviour
     {
         retreat = true;
         done_Attack = false;
-        oldPlayerPos = player.transform.position;
         aiAnim.SetBool("Retreat", true);
         aiAnim.SetBool("Weak", false);
         aiAnim.SetBool("Attack", false);

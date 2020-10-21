@@ -9,7 +9,9 @@ public class PlayerMovement : MonoBehaviour
     float speed = 3;
     float horizontalInput;
     float verticalInput;
-    float staminaFill = 1;
+    public static float staminaFill = 1;
+    bool defend;
+    bool doneAttack;
     RectTransform staminaBar;
     Animator plAnim;
     SpriteRenderer sr;
@@ -24,17 +26,22 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        horizontalInput = Input.GetAxis("Horizontal") * speed;
-        verticalInput = Input.GetAxis("Vertical") * speed;
+        if (defend != true)
+        {
+            horizontalInput = Input.GetAxis("Horizontal") * speed;
+            verticalInput = Input.GetAxis("Vertical") * speed;
 
-        transform.Translate(horizontalInput * Time.deltaTime, verticalInput * Time.deltaTime, 0);
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -4.9f, -0.3f), transform.position.z);
+            transform.Translate(horizontalInput * Time.deltaTime, verticalInput * Time.deltaTime, 0);
+            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -4.9f, -0.3f), transform.position.z);
 
-        float y = transform.position.y;
+            float y = transform.position.y;
 
-        float scale = 2 + (1 / 4.9f) * -y;
+            float scale = 2 + (1 / 4.9f) * -y;
 
-        transform.localScale = new Vector3(scale, scale, scale);
+            transform.localScale = new Vector3(scale, scale, scale);
+        }
+
+       
     }
 
     void Update()
@@ -68,39 +75,38 @@ public class PlayerMovement : MonoBehaviour
         else if (staminaFill < 1)
         {
             staminaFill += 0.05f * Time.deltaTime;
-
-            Debug.Log(staminaFill);
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && staminaFill > 0)
+        if (Input.GetKey(KeyCode.R) && staminaFill > 0.01f)
         {
             plAnim.SetBool("Idle", false);
             plAnim.SetBool("Defend", true);
-
-            
-
+            defend = true;
         }
-        if (Input.GetKeyUp(KeyCode.R))
+        else
         {
             plAnim.SetBool("Idle", true);
             plAnim.SetBool("Defend", false);
+            defend = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && staminaFill > 0.20f && doneAttack == false)
         {
             plAnim.SetBool("Idle", false);
             plAnim.SetBool("Defend", false);
             plAnim.SetBool("Attack", true);
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            plAnim.SetBool("Idle", true);
-            plAnim.SetBool("Defend", false);
-            plAnim.SetBool("Attack", false);
+            staminaFill -= 0.20f;
+            Invoke("Attack", 0.1f);
+            doneAttack = true;
         }
 
         staminaBar.localScale = new Vector3(staminaFill, 1, 1);
+    }
 
+    void Attack()
+    {
+        plAnim.SetBool("Attack", false);
+        doneAttack = false;
 
     }
 }
