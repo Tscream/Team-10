@@ -70,7 +70,7 @@ public class _AI : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
 
-        if (Vector3.Distance(player.transform.position, transform.position) < 2 && aiAnim.GetBool("Retreat") == false)
+        if (Vector3.Distance(player.transform.position, transform.position) < 2 && aiAnim.GetBool("Retreat") == false && aiAnim.GetBool("Attack") == false)
         {
             aiAnim.SetBool("Walk", false);
             aiAnim.SetBool("Attack", true);
@@ -150,6 +150,8 @@ public class _AI : MonoBehaviour
         done_Attack = false;
         aiAnim.SetBool("Retreat", true);
         aiAnim.SetBool("Weak", false);
+        aiAnim.SetBool("Walk", false);
+
         aiAnim.SetBool("Attack", false);
     }
 
