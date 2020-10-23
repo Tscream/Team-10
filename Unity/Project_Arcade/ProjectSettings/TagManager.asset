@@ -4,17 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Marco
-  - Keyx
-  - Luc
-  - Pieter
-  - Kenny
-  - Robin
-  - Noor
-  - Frans
-  - Gloria
-  - David
-  - Gaby
+  - CamL
+  - CamR
   layers:
   - Default
   - TransparentFX

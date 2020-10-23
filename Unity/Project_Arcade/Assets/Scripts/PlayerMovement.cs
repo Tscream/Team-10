@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     RectTransform staminaBar;
     Animator plAnim;
     SpriteRenderer sr;
+    public static bool rechts;
+    public static bool links;
 
 
     void Start()
@@ -108,5 +110,35 @@ public class PlayerMovement : MonoBehaviour
         plAnim.SetBool("Attack", false);
         doneAttack = false;
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "CamR")
+        {
+            rechts = true;
+        }
+        
+
+        if (collision.gameObject.tag == "CamL")
+        {
+            links = true;
+        }
+       
+    }
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "CamR")
+        {
+            rechts = false;
+        }
+
+
+        if (collision.gameObject.tag == "CamL")
+        {
+            links = false;
+        }
     }
 }
