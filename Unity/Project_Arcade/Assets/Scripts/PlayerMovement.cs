@@ -9,10 +9,10 @@ public class PlayerMovement : MonoBehaviour
     float speed = 3;
     float horizontalInput;
     float verticalInput;
-    public static float staminaFill = 1;
+    public static float staminaFill = 1; // de float die de stamina bar regelt
     bool defend;
     bool doneAttack;
-    RectTransform staminaBar;
+    RectTransform staminaBar; // te recttransform van de stamina bar
     Animator plAnim;
     SpriteRenderer sr;
     public static bool rechts;
@@ -72,11 +72,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.R) && staminaFill > 0)
         {
-            staminaFill -= 0.1f * Time.deltaTime;
+            staminaFill -= 0.1f * Time.deltaTime; // als player defend gaat er iedere milisec 0.1 van zijn stamina af
         }
         else if (staminaFill < 1)
         {
-            staminaFill += 0.05f * Time.deltaTime;
+            staminaFill += 0.05f * Time.deltaTime; // telt iedere miliseconde 0.05 op bij staminafill tot een max van 1
         }
 
         if (Input.GetKey(KeyCode.R) && staminaFill > 0.01f)
@@ -97,12 +97,12 @@ public class PlayerMovement : MonoBehaviour
             plAnim.SetBool("Idle", false);
             plAnim.SetBool("Defend", false);
             plAnim.SetBool("Attack", true);
-            staminaFill -= 0.20f;
+            staminaFill -= 0.20f; //haalt 0.20 van de stamina fill af (1 is max) als hij aanvalt
             Invoke("Attack", 0.1f);
             doneAttack = true;
         }
 
-        staminaBar.localScale = new Vector3(staminaFill, 1, 1);
+        staminaBar.localScale = new Vector3(staminaFill, 1, 1); // pakt de scale van de stamina bar en maakt daar de stamina float van
     }
 
     void Attack()
