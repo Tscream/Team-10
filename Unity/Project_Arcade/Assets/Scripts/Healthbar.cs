@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Healthbar : MonoBehaviour
 {
@@ -9,8 +10,17 @@ public class Healthbar : MonoBehaviour
     public Slider sliderhealth;
     public Gradient gradient;
     public Image fill;
-   
 
+
+
+    private void Update()
+    {
+        if(sliderhealth.value == 0)
+        {
+            Debug.Log("No health");
+            SceneManager.LoadScene("Luuk_Test"); //dit moet veranderen naar wat we gaan doen voor de death scene, maar laat het hier staan want dit werkt. 
+        }
+    }
 
     public void SetMaxHealth(int health)
     {
@@ -27,6 +37,6 @@ public class Healthbar : MonoBehaviour
         fill.color = gradient.Evaluate(sliderhealth.normalizedValue);
     }
 
-
+    
     
 }

@@ -114,7 +114,7 @@ public class _AI : MonoBehaviour
                     aiAnim.SetBool("Idle", true);
                 }
 
-                Debug.Log("feest");
+
 
                 if (Time.time >= cooldown)
                 {
@@ -124,7 +124,7 @@ public class _AI : MonoBehaviour
             }
             else
             {
-                Debug.Log("fuifje");
+               
 
 
                 transform.Translate(speed * Time.deltaTime, 0, 0);
@@ -134,6 +134,7 @@ public class _AI : MonoBehaviour
 
         hp.transform.localScale = new Vector3(healthFill, 0.05f, 1);
 
+      
         if(transform.position.y > player.transform.position.y)
         {
             GetComponent<SpriteRenderer>().sortingOrder = -1; 
