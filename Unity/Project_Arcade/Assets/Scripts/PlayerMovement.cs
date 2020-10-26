@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer sr;
     public static bool rechts;
     public static bool links;
+    public static bool damage; //zelfde verhaal hier. hier is het de bedoeling dat door deze static bool de ai damage kan krijgen.
 
 
     void Start()
@@ -100,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
             staminaFill -= 0.20f; //haalt 0.20 van de stamina fill af (1 is max) als hij aanvalt
             Invoke("Attack", 0.1f);
             doneAttack = true;
+            damage = true;  // door de damage mogelijkheid heel kort (0.1f) mogelijk te maken kan damage niet gespamd worden zoals ik al in een vid heb laten zien.
         }
 
         staminaBar.localScale = new Vector3(staminaFill, 1, 1); // pakt de scale van de stamina bar en maakt daar de stamina float van
@@ -109,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
     {
         plAnim.SetBool("Attack", false);
         doneAttack = false;
+        damage = false; // en gelijk na het damage doen word die weer false gemaakt.
 
     }
 

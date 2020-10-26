@@ -20,6 +20,7 @@ public class _AI : MonoBehaviour
     bool done_Attack;
     bool done_Retreat;
     bool retreat;
+    public static bool damage; // de bool die ik wil gebruiken voor de dmg van de ai healthbar
  
     void Start()
     {
@@ -91,7 +92,7 @@ public class _AI : MonoBehaviour
             Debug.Log(oldPlayerPos);
         }
 
-        if (aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space))
+        if (aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space) && damage == true) // hier zou de ai damage moeten krijgen, maar dat gebeurd alleen nog niet
         {
             healthFill -= 0.1f;
         }
