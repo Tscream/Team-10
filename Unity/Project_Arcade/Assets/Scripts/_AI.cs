@@ -28,7 +28,7 @@ public class _AI : MonoBehaviour
         player = GameObject.Find("Player");
         hp = gameObject.transform.Find("Fill").gameObject;
         nametag = gameObject.transform.Find("Nametag").gameObject;
-        playerHealth = GameObject.Find("Canvas/Healthbar").GetComponent<Healthbar>();
+        playerHealth = GameObject.Find("Canvas/Bars/Healthbar").GetComponent<Healthbar>();
         currentHealth = maxHealth;
     }
 

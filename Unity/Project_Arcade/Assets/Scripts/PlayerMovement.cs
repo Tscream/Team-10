@@ -20,16 +20,18 @@ public class PlayerMovement : MonoBehaviour
     public static bool damage; //zelfde verhaal hier. hier is het de bedoeling dat door deze static bool de ai damage kan krijgen.
 
 
+
     void Start()
     {
         plAnim = gameObject.GetComponent<Animator>();
         sr = gameObject.GetComponent<SpriteRenderer>();
-        staminaBar = GameObject.Find("Canvas/Staminabar/Fill").GetComponent<RectTransform>();
+        staminaBar = GameObject.Find("Canvas/Bars/Staminabar/Fill").GetComponent<RectTransform>();
     }
 
     void FixedUpdate()
     {
-        if (defend != true)
+
+        if (defend != true && Menu.begin == true)
         {
             horizontalInput = Input.GetAxis("Horizontal") * speed;
             verticalInput = Input.GetAxis("Vertical") * speed;
