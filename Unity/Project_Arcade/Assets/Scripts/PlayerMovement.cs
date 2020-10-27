@@ -11,9 +11,9 @@ public class PlayerMovement : MonoBehaviour
     float verticalInput;
     public static float staminaFill = 1; // de float die de stamina bar regelt
     bool defend;
-    bool doneAttack;
+    public static bool doneAttack;
     RectTransform staminaBar; // te recttransform van de stamina bar
-    Animator plAnim;
+    public static Animator plAnim;
     SpriteRenderer sr;
     public static bool rechts;
     public static bool links;
@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
             plAnim.SetBool("Defend", false);
             plAnim.SetBool("Attack", true);
             staminaFill -= 0.20f; //haalt 0.20 van de stamina fill af (1 is max) als hij aanvalt
-            Invoke("Attack", 0.1f);
+            Invoke("Attack", 0.3f);
             doneAttack = true;
             damage = true;  // door de damage mogelijkheid heel kort (0.1f) mogelijk te maken kan damage niet gespamd worden zoals ik al in een vid heb laten zien.
         }
