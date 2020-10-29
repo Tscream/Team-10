@@ -14,20 +14,6 @@ public class Menu : MonoBehaviour
     public GameObject button_but_red;
     static public bool begin;
     
-     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-        
-    }
-
     private void FixedUpdate()
     {
         if (begin == true)
@@ -40,7 +26,6 @@ public class Menu : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
 
     public void Play()
     {
@@ -56,16 +41,11 @@ public class Menu : MonoBehaviour
         button.SetActive(false);
         trein_vertrekt.SetActive(true);
         Invoke("treinmelding", 3f);
-        
-        
     }
 
     void treinmelding()
     {
-        //this.gameObject.GetComponent<RectTransform>().localPosition = Vector2.MoveTowards(transform.position, new Vector2(0, -1200), 5f);
         begin = true;
     }
 
-
-    
 }

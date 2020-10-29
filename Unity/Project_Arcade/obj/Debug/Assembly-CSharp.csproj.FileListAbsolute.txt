@@ -1,2 +1,1 @@
-/Users/tiyani/Documents/Github/Team-10/Unity/Project_Arcade/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
 /Users/tiyani/Documents/Github/Team-10/Unity/Project_Arcade/obj/Debug/Assembly-CSharp.csproj.CoreCompileInputs.cache

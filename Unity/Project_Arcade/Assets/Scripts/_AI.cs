@@ -20,15 +20,14 @@ public class _AI : MonoBehaviour
     bool done_Attack;
     bool done_Retreat;
     bool retreat;
-  
- 
+
     void Start()
     {
         aiAnim = gameObject.GetComponent<Animator>();
         player = GameObject.Find("Player");
         hp = gameObject.transform.Find("Fill").gameObject;
         nametag = gameObject.transform.Find("Nametag").gameObject;
-        playerHealth = GameObject.Find("Canvas/Bars/Healthbar").GetComponent<Healthbar>();
+        playerHealth = GameObject.Find("Canvas/Healthbar").GetComponent<Healthbar>();
         currentHealth = maxHealth;
     }
 
@@ -89,13 +88,12 @@ public class _AI : MonoBehaviour
             oldPlayerPos = player.transform.position;
             Invoke("Retreat", 1f);
             done_Attack = true;
-            Debug.Log(oldPlayerPos);
         }
 
-        if (aiAnim.GetBool("Weak") == true && PlayerMovement.plAnim.GetBool("Attack") == true && PlayerMovement.doneAttack == false) // hier zou de ai damage moeten krijgen, maar dat gebeurd alleen nog niet
+        if (aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space) && PlayerMovement.staminaFill >= 0.20f)
         {
             healthFill -= 0.1f;
-            Invoke ("Retreat", 1f);
+            Invoke ("Retreat", 0.2f);
         }
 
         if(aiAnim.GetBool("Weak") == true)
@@ -105,8 +103,6 @@ public class _AI : MonoBehaviour
 
         if (retreat == true)
         {
-
-
             if (Vector3.Distance(transform.position, oldPlayerPos) > 8)
             {
                 if(done_Retreat == false)
@@ -116,8 +112,6 @@ public class _AI : MonoBehaviour
                     aiAnim.SetBool("Idle", true);
                 }
 
-
-
                 if (Time.time >= cooldown)
                 {
                     retreat = false;
@@ -126,9 +120,6 @@ public class _AI : MonoBehaviour
             }
             else
             {
-               
-
-
                 transform.Translate(speed * Time.deltaTime, 0, 0);
                 gameObject.GetComponent<SpriteRenderer>().flipX = false;
             }
@@ -136,7 +127,6 @@ public class _AI : MonoBehaviour
 
         hp.transform.localScale = new Vector3(healthFill, 0.05f, 1);
 
-      
         if(transform.position.y > player.transform.position.y)
         {
             GetComponent<SpriteRenderer>().sortingOrder = -1; 
@@ -154,7 +144,6 @@ public class _AI : MonoBehaviour
         aiAnim.SetBool("Retreat", true);
         aiAnim.SetBool("Weak", false);
         aiAnim.SetBool("Walk", false);
-
         aiAnim.SetBool("Attack", false);
     }
 
