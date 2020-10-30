@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
@@ -12,18 +13,50 @@ public class Menu : MonoBehaviour
     public GameObject button;
     public GameObject trein_vertrekt;
     public GameObject button_but_red;
+    public GameObject start_menu;
+    public GameObject pauzescherm;
+    public GameObject resumeknop;
+    public GameObject main_menuknop;
     static public bool begin;
-    
+    public static bool pauze;
+
+
+
+
+    void Start()
+    {
+        
+    }
+
     private void FixedUpdate()
     {
         if (begin == true)
         {
-            transform.Translate(0, -5, 0);
+            start_menu.transform.Translate(0, -5, 0);
         }
 
         if (transform.position.y <= -500)
         {
             Destroy(this.gameObject);
+        }
+    }
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && pauze == false && begin == true)
+        {
+            pauze = true;
+            pauzescherm.SetActive(true);
+            resumeknop.SetActive(true);
+            main_menuknop.SetActive(true);
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && pauze == true && begin == true)
+        {
+            pauze = false;
+            pauzescherm.SetActive(false);
+            resumeknop.SetActive(false);
+            main_menuknop.SetActive(false);
         }
     }
 
@@ -40,12 +73,32 @@ public class Menu : MonoBehaviour
         control.SetActive(false);
         button.SetActive(false);
         trein_vertrekt.SetActive(true);
-        Invoke("treinmelding", 3f);
+        Invoke("Treinmelding", 3f);
     }
 
-    void treinmelding()
+
+
+    void Treinmelding()
     {
         begin = true;
+    }
+
+    public void resume()
+    {
+        pauze = false;
+        pauzescherm.SetActive(false);
+        resumeknop.SetActive(false);
+        main_menuknop.SetActive(false);
+    }
+
+    public void Main_menu()
+    {
+        SceneManager.LoadScene("Team_10");
+        begin = false;
+        pauze = false;
+        pauzescherm.SetActive(false);
+        resumeknop.SetActive(false);
+        main_menuknop.SetActive(false);
     }
 
 }

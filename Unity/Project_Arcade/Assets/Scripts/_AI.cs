@@ -57,83 +57,86 @@ public class _AI : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 3 && aiAnim.GetBool("Retreat") != true) 
+        if (Menu.pauze == false && Menu.begin == true)
         {
-            aiAnim.SetBool("Idle", false);
-            aiAnim.SetBool("Walk", true);
-            done_Retreat = false;
-            gameObject.GetComponent<SpriteRenderer>().flipX = true;
-        }
-
-        if (aiAnim.GetBool("Walk") == true ) 
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-        }
-
-        if (Vector3.Distance(player.transform.position, transform.position) < 2 && aiAnim.GetBool("Retreat") == false && aiAnim.GetBool("Attack") == false)
-        {
-            aiAnim.SetBool("Walk", false);
-            aiAnim.SetBool("Attack", true);
-        }
-
-        if (aiAnim.GetBool("Attack") == true && Input.GetKey(KeyCode.R) && PlayerMovement.staminaFill > 0.01f)
-        {
-            aiAnim.SetBool("Weak", true);
-        }
-
-        if (aiAnim.GetBool("Attack") == true && done_Attack == false && aiAnim.GetBool("Weak") == false)
-        {
-            aiAnim.SetBool("Attack", false);
-            TakeDamage(1);
-            oldPlayerPos = player.transform.position;
-            Invoke("Retreat", 1f);
-            done_Attack = true;
-        }
-
-        if (aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space) && PlayerMovement.staminaFill >= 0.20f)
-        {
-            healthFill -= 0.1f;
-            Invoke ("Retreat", 0.2f);
-        }
-
-        if(aiAnim.GetBool("Weak") == true)
-        {
-            Invoke("Retreat", 3f);
-        }
-
-        if (retreat == true)
-        {
-            if (Vector3.Distance(transform.position, oldPlayerPos) > 8)
+            if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 3 && aiAnim.GetBool("Retreat") != true)
             {
-                if(done_Retreat == false)
-                {
-                    cooldown = Time.time + 1f;
-                    done_Retreat = true;
-                    aiAnim.SetBool("Idle", true);
-                }
+                aiAnim.SetBool("Idle", false);
+                aiAnim.SetBool("Walk", true);
+                done_Retreat = false;
+                gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            }
 
-                if (Time.time >= cooldown)
+            if (aiAnim.GetBool("Walk") == true)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+            }
+
+            if (Vector3.Distance(player.transform.position, transform.position) < 2 && aiAnim.GetBool("Retreat") == false && aiAnim.GetBool("Attack") == false)
+            {
+                aiAnim.SetBool("Walk", false);
+                aiAnim.SetBool("Attack", true);
+            }
+
+            if (aiAnim.GetBool("Attack") == true && Input.GetKey(KeyCode.R) && PlayerMovement.staminaFill > 0.01f)
+            {
+                aiAnim.SetBool("Weak", true);
+            }
+
+            if (aiAnim.GetBool("Attack") == true && done_Attack == false && aiAnim.GetBool("Weak") == false)
+            {
+                aiAnim.SetBool("Attack", false);
+                TakeDamage(1);
+                oldPlayerPos = player.transform.position;
+                Invoke("Retreat", 1f);
+                done_Attack = true;
+            }
+
+            if (aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space) && PlayerMovement.staminaFill >= 0.20f)
+            {
+                healthFill -= 0.1f;
+                Invoke("Retreat", 0.2f);
+            }
+
+            if (aiAnim.GetBool("Weak") == true)
+            {
+                Invoke("Retreat", 3f);
+            }
+
+            if (retreat == true)
+            {
+                if (Vector3.Distance(transform.position, oldPlayerPos) > 8)
                 {
-                    retreat = false;
-                    aiAnim.SetBool("Retreat", false);
+                    if (done_Retreat == false)
+                    {
+                        cooldown = Time.time + 1f;
+                        done_Retreat = true;
+                        aiAnim.SetBool("Idle", true);
+                    }
+
+                    if (Time.time >= cooldown)
+                    {
+                        retreat = false;
+                        aiAnim.SetBool("Retreat", false);
+                    }
                 }
+                else
+                {
+                    transform.Translate(speed * Time.deltaTime, 0, 0);
+                    gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                }
+            }
+
+            hp.transform.localScale = new Vector3(healthFill, 0.05f, 1);
+
+            if (transform.position.y > player.transform.position.y)
+            {
+                GetComponent<SpriteRenderer>().sortingOrder = -1;
             }
             else
             {
-                transform.Translate(speed * Time.deltaTime, 0, 0);
-                gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                GetComponent<SpriteRenderer>().sortingOrder = 1;
             }
-        }
-
-        hp.transform.localScale = new Vector3(healthFill, 0.05f, 1);
-
-        if(transform.position.y > player.transform.position.y)
-        {
-            GetComponent<SpriteRenderer>().sortingOrder = -1; 
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
     }
 
