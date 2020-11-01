@@ -66,6 +66,7 @@ public class Menu : MonoBehaviour
         button.SetActive(true);
         login.SetActive(false);
         play.SetActive(false);
+        button_but_red.SetActive(false);
     }
 
     public void Button()
@@ -99,6 +100,11 @@ public class Menu : MonoBehaviour
         pauzescherm.SetActive(false);
         resumeknop.SetActive(false);
         main_menuknop.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
 }

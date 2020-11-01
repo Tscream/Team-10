@@ -22,12 +22,12 @@ public class Cam : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       if(PlayerMovement.rechts == true)
+       if(PlayerMovement.rechts == true && transform.position.x <= 30)
         {
             transform.Translate(0.06f, 0, 0);
         }
 
-       if(PlayerMovement.links == true)
+       if(PlayerMovement.links == true && transform.position.x >= -30.84)
         {
             transform.Translate(-0.06f, 0, 0);
         }

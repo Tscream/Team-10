@@ -1,7 +1,10 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Cam
     - Healthbar
+    - LayerManager
+    - Menu
     - PlayerMovement
     - _AI
     Unity.2D.Animation.Editor.dll:
@@ -23,10 +26,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -35,11 +36,41 @@ ScriptsOnlyBuild:
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
+    - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.RawImage
     - UnityEngine.UI.Slider
+    - UnityEngine.UI.Text
   sceneClasses:
+    Assets/Scenes/Luuk_Test.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 61
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
     Assets/Scenes/Team_10.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -65,6 +96,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 61
       Script: {instanceID: 0}
+    - Class: 68
+      Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
     - Class: 81
@@ -78,31 +111,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11848}
     - Class: 114
+      Script: {instanceID: 12156}
+    - Class: 114
       Script: {instanceID: 12210}
     - Class: 114
-      Script: {instanceID: 12916}
+      Script: {instanceID: 12342}
     - Class: 114
-      Script: {instanceID: 12974}
+      Script: {instanceID: 12918}
     - Class: 114
-      Script: {instanceID: 12988}
+      Script: {instanceID: 12976}
     - Class: 114
-      Script: {instanceID: 13944}
+      Script: {instanceID: 12990}
     - Class: 114
-      Script: {instanceID: 14068}
+      Script: {instanceID: 13196}
     - Class: 114
-      Script: {instanceID: 14088}
+      Script: {instanceID: 13698}
     - Class: 114
-      Script: {instanceID: 14334}
+      Script: {instanceID: 13738}
     - Class: 114
-      Script: {instanceID: 14514}
+      Script: {instanceID: 13948}
     - Class: 114
-      Script: {instanceID: 14804}
+      Script: {instanceID: 14072}
     - Class: 114
-      Script: {instanceID: 14968}
+      Script: {instanceID: 14092}
     - Class: 114
-      Script: {instanceID: 15148}
+      Script: {instanceID: 14338}
     - Class: 114
-      Script: {instanceID: 15194}
+      Script: {instanceID: 14518}
+    - Class: 114
+      Script: {instanceID: 14786}
+    - Class: 114
+      Script: {instanceID: 14810}
+    - Class: 114
+      Script: {instanceID: 14974}
+    - Class: 114
+      Script: {instanceID: 15154}
+    - Class: 114
+      Script: {instanceID: 15200}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -224,6 +269,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: GridLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 76bbc912ad653d90395f1ed5c2c5a7bd
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Cam
   - hash:
       serializedVersion: 2
       Hash: 523ce309f50d9eee6a8fc0e2f86c9c97
@@ -362,6 +413,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Selectable
+  - hash:
+      serializedVersion: 2
+      Hash: 8c66f506b3e0be9931883857a47cb5c2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Menu
   - hash:
       serializedVersion: 2
       Hash: 040dd48e3a027d5424519a5fa2009df4
@@ -520,6 +577,12 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
+      Hash: 751ad5767678e87a1c564a0e64e80aea
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LayerManager
+  - hash:
+      serializedVersion: 2
       Hash: d791aa6007fa3640be1164ea75bb087d
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -623,4 +686,5 @@ ScriptsOnlyBuild:
   platform: 5
   scenePathNames:
   - Assets/Scenes/Team_10.unity
-  playerPath: /Users/tiyani/Desktop/Snel Naar Huis/Snel Naar Huis/Team 10.exe
+  - Assets/Scenes/Luuk_Test.unity
+  playerPath: C:/Users/luukh/OneDrive/Bureaublad/Snel naar huis/Team 10.exe

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -98,6 +99,17 @@ public class PlayerMovement : MonoBehaviour
                 staminaFill -= 0.20f; //haalt 0.20 van de stamina fill af (1 is max) als hij aanvalt
                 Invoke("Attack", 0.3f);
                 doneAttack = true;
+            }
+
+            // hier is het eind punt geschreven, maar je hebt de timer nog niet gemaakt dus hij staat pretty much klaar.
+            if(transform.position.x == 33 /*&& tijd gehaald is waar*/)
+            {
+                SceneManager.LoadScene("Luuk_Test");
+            }
+
+            if (transform.position.x == 33 /*&& tijd gehaald is niet waar*/)
+            {
+                SceneManager.LoadScene("Luuk_Test"); // moet eigenlijk een andere scene zijn maar da moeten we eingelijk nog ff fixen
             }
 
             staminaBar.localScale = new Vector3(staminaFill, 1, 1); // pakt de scale van de stamina bar en maakt daar de stamina float van
