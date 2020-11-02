@@ -4,6 +4,7 @@ using System.Drawing;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -17,15 +18,19 @@ public class Menu : MonoBehaviour
     public GameObject pauzescherm;
     public GameObject resumeknop;
     public GameObject main_menuknop;
+    public Text tijdObject;
     static public bool begin;
     public static bool pauze;
+
+    float tijd; // hoe lang je hebt
 
 
 
 
     void Start()
     {
-        
+        pauze = true;
+        tijd = 120; // je hebt 120 seconde (2 minuten) de tijd
     }
 
     private void FixedUpdate()
@@ -35,12 +40,13 @@ public class Menu : MonoBehaviour
             start_menu.transform.Translate(0, -5, 0);
         }
 
-        if (transform.position.y <= -500)
+        if (start_menu.transform.position.y <= -225)
         {
-            Destroy(this.gameObject);
+            Destroy(start_menu);
+            pauze = false;
+            StartCoroutine(Timer());
         }
     }
-
 
     void Update()
     {
@@ -54,10 +60,20 @@ public class Menu : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Escape) && pauze == true && begin == true)
         {
             pauze = false;
+            StartCoroutine(Timer());
             pauzescherm.SetActive(false);
             resumeknop.SetActive(false);
             main_menuknop.SetActive(false);
         }
+
+
+
+        string minutes = ((int)tijd / 60).ToString("f0").PadLeft(2,'0'); // format de string van een decimaal getal naar een die je op een klok ziet
+        string seconds = (tijd % 60).ToString("f0").PadLeft(2, '0');
+
+
+        tijdObject.text = minutes + ":" + seconds; //update te text met de tijd
+
     }
 
     public void Play()
@@ -87,6 +103,7 @@ public class Menu : MonoBehaviour
     public void resume()
     {
         pauze = false;
+        StartCoroutine(Timer());
         pauzescherm.SetActive(false);
         resumeknop.SetActive(false);
         main_menuknop.SetActive(false);
@@ -97,6 +114,7 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Team_10");
         begin = false;
         pauze = false;
+        StartCoroutine(Timer());
         pauzescherm.SetActive(false);
         resumeknop.SetActive(false);
         main_menuknop.SetActive(false);
@@ -107,4 +125,13 @@ public class Menu : MonoBehaviour
         Application.Quit();
     }
 
+
+    private IEnumerator Timer()
+    {
+        while (pauze == false)
+        {
+            yield return new WaitForSeconds(1f); // zo lang als dat pauze false is haalt hij iedere seconde 1 van de tijd af
+            tijd--;
+        }
+    }
 }

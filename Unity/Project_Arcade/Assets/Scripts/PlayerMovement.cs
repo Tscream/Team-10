@@ -105,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
             if(transform.position.x == 33 /*&& tijd gehaald is waar*/)
             {
                 SceneManager.LoadScene("Luuk_Test");
+                Debug.Log("feest");
             }
 
             if (transform.position.x == 33 /*&& tijd gehaald is niet waar*/)
