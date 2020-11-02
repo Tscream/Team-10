@@ -21,8 +21,7 @@ public class Menu : MonoBehaviour
     public Text tijdObject;
     static public bool begin;
     public static bool pauze;
-
-    float tijd; // hoe lang je hebt
+    public static float tijd; 
 
 
 
@@ -31,6 +30,7 @@ public class Menu : MonoBehaviour
     {
         pauze = true;
         tijd = 120; // je hebt 120 seconde (2 minuten) de tijd
+        
     }
 
     private void FixedUpdate()
@@ -40,9 +40,9 @@ public class Menu : MonoBehaviour
             start_menu.transform.Translate(0, -5, 0);
         }
 
-        if (start_menu.transform.position.y <= -225)
+        if (start_menu.transform.position.y <= -225 && start_menu != null)
         {
-            Destroy(start_menu);
+            start_menu.SetActive(false);
             pauze = false;
             StartCoroutine(Timer());
         }

@@ -101,16 +101,16 @@ public class PlayerMovement : MonoBehaviour
                 doneAttack = true;
             }
 
-            // hier is het eind punt geschreven, maar je hebt de timer nog niet gemaakt dus hij staat pretty much klaar.
-            if(transform.position.x == 33 /*&& tijd gehaald is waar*/)
+           
+            if(transform.position.x == 33 && Menu.tijd > 0) // op tijd
             {
                 SceneManager.LoadScene("Luuk_Test");
                 Debug.Log("feest");
             }
 
-            if (transform.position.x == 33 /*&& tijd gehaald is niet waar*/)
+            if (transform.position.x == 33 && Menu.tijd <= 0) // te laat
             {
-                SceneManager.LoadScene("Luuk_Test"); // moet eigenlijk een andere scene zijn maar da moeten we eingelijk nog ff fixen
+                SceneManager.LoadScene("Luuk_Test"); 
             }
 
             staminaBar.localScale = new Vector3(staminaFill, 1, 1); // pakt de scale van de stamina bar en maakt daar de stamina float van
