@@ -39,7 +39,7 @@ public class Cam : MonoBehaviour
     {
         if(Menu.begin == true && done == false)
         {
-            gameplay.Play();
+            gameplay.Play(0);
             done = true;
         }
     }

@@ -1,25 +1,19 @@
-﻿<Properties StartupConfiguration="{0ED1991F-CA79-6634-5717-46C890150A50}|">
+﻿<Properties>
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Cam.cs">
     <Files>
       <File FileName="Assets/Scripts/_AI.cs" Line="80" Column="1" />
-      <File FileName="Assets/Scripts/PlayerMovement.cs" />
-      <File FileName="Assets/Scripts/Healthbar.cs" />
+      <File FileName="Assets/Scripts/PlayerMovement.cs" Line="160" Column="1" />
+      <File FileName="Assets/Scripts/Healthbar.cs" Line="13" Column="12" />
       <File FileName="Assets/Scripts/LayerManager.cs" />
-      <File FileName="Assets/Scripts/Menu.cs" />
-      <File FileName="Assets/Scripts/Marco.cs" />
+      <File FileName="Assets/Scripts/Menu.cs" Line="34" Column="49" />
+      <File FileName="Assets/Scripts/Marco.cs" Line="19" Column="42" />
       <File FileName="Assets/Scripts/SceneSwitcher.cs" Line="18" Column="23" />
-      <File FileName="Assets/Scripts/Cam.cs" Line="38" Column="9" />
+      <File FileName="Assets/Scripts/Cam.cs" Line="19" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Project_Arcade" expanded="True">
-            <Node name="Assets" expanded="True">
-              <Node name="Scripts" expanded="True">
-                <Node name="Cam.cs" selected="True" />
-              </Node>
-            </Node>
-          </Node>
+          <Node name="Project_Arcade" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
