@@ -5,18 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public void Victory()
+    public void Main_menu()
     {
         SceneManager.LoadScene("Team_10");
     }
 
     public void Deadth()
     {
-        //SceneManager.LoadScene("");
+        SceneManager.LoadScene("Team_10");
     }
 
     public void Time()
     {
-        //SceneManager.LoadScene("");
+       SceneManager.LoadScene("Team_10");
     }
 }

@@ -133,7 +133,7 @@ public class _AI : MonoBehaviour
                 GetComponent<SpriteRenderer>().sortingOrder = 1;
             }
 
-            if(transform.localScale.x <= 0)
+            if(hp.transform.localScale.x <= 0.1f)
             {
                 Destroy(this.gameObject);
             }

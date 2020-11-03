@@ -16,7 +16,14 @@ public class Marco : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.Translate(-0.3f, 0, 0);
+        transform.Translate(-0.15f, 0, 0);
+
+        float y = transform.position.y;
+
+        float scale = 2 + (1 / 4.9f) * -y;
+
+        
+        transform.localScale = new Vector3(scale, scale, scale);
 
         if (player.transform.position.y > transform.position.y)
         {
@@ -25,6 +32,11 @@ public class Marco : MonoBehaviour
         else
         {
             GetComponent<SpriteRenderer>().sortingOrder = -1;
+        }
+
+        if(transform.position.x <= -45)
+        {
+            Destroy(this.gameObject);
         }
     }
 }
