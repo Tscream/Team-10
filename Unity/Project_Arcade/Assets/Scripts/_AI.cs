@@ -54,7 +54,7 @@ public class _AI : MonoBehaviour
     {
         if (Menu.pauze == false && Menu.begin == true)
         {
-            if (Vector3.Distance(player.transform.position, transform.position) <= 10 && Vector3.Distance(player.transform.position, transform.position) >= 3 && aiAnim.GetBool("Retreat") != true)
+            if (Vector3.Distance(player.transform.position, transform.position) <= 7 && Vector3.Distance(player.transform.position, transform.position) >= 3 && aiAnim.GetBool("Retreat") != true)
             {
                 aiAnim.SetBool("Idle", false);
                 aiAnim.SetBool("Walk", true);
@@ -89,7 +89,7 @@ public class _AI : MonoBehaviour
 
             if (aiAnim.GetBool("Weak") == true && Input.GetKeyDown(KeyCode.Space) && PlayerMovement.staminaFill >= 0.20f)
             {
-                healthFill -= 0.1f;
+                healthFill -= 0.2f;
                 Invoke("Retreat", 0.2f);
             }
 
@@ -100,7 +100,7 @@ public class _AI : MonoBehaviour
 
             if (retreat == true)
             {
-                if (Vector3.Distance(transform.position, oldPlayerPos) > 8)
+                if (Vector3.Distance(transform.position, oldPlayerPos) > 5)
                 {
                     if (done_Retreat == false)
                     {

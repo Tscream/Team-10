@@ -8,6 +8,8 @@ public class Cam : MonoBehaviour
     public GameObject Camleft;
     public GameObject Camright;
     public GameObject player;
+    public AudioSource gameplay;
+    bool done;
     
     
     // Start is called before the first frame update
@@ -33,5 +35,14 @@ public class Cam : MonoBehaviour
         }
     }
 
-   
+    private void Update()
+    {
+        if(Menu.begin == true && done == false)
+        {
+            gameplay.Play();
+            done = true;
+        }
+    }
+
+
 }

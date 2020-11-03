@@ -10,12 +10,17 @@ public class Healthbar : MonoBehaviour
     public Slider sliderhealth;
     public Gradient gradient;
     public Image fill;
+    public bool godMode;
 
     private void Update()
     {
-        if(sliderhealth.value == 0)
+        if(sliderhealth.value == 0 && godMode == false)
         {
             SceneManager.LoadScene("Deadth"); //dit moet veranderen naar wat we gaan doen voor de death scene, maar laat het hier staan want dit werkt. 
+        }
+        if (Input.GetKey(KeyCode.G))
+        {
+            godMode = true;
         }
     }
 

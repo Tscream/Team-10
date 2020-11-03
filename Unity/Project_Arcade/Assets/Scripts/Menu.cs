@@ -26,7 +26,7 @@ public class Menu : MonoBehaviour
     {
         pauze = true;
         begin = false;
-        tijd = 10; // je hebt 120 seconde (2 minuten) de tijd
+        tijd = 300; // je hebt 120 seconde (2 minuten) de tijd
     }
 
     private void FixedUpdate()
