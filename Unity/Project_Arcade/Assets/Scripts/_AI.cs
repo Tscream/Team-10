@@ -10,10 +10,7 @@ public class _AI : MonoBehaviour
     GameObject player;
     GameObject hp;
     GameObject nametag;
-    Healthbar playerHealth;
     Vector3 oldPlayerPos;
-    int maxHealth = 10;
-    int currentHealth;
     float speed = 3f;
     float cooldown;
     float healthFill = 0.6f;
@@ -27,8 +24,6 @@ public class _AI : MonoBehaviour
         player = GameObject.Find("Player");
         hp = gameObject.transform.Find("Fill").gameObject;
         nametag = gameObject.transform.Find("Nametag").gameObject;
-        playerHealth = GameObject.Find("Canvas/Healthbar").GetComponent<Healthbar>();
-        currentHealth = maxHealth;
     }
 
     void FixedUpdate()
@@ -86,7 +81,7 @@ public class _AI : MonoBehaviour
             if (aiAnim.GetBool("Attack") == true && done_Attack == false && aiAnim.GetBool("Weak") == false)
             {
                 aiAnim.SetBool("Attack", false);
-                TakeDamage(1);
+                PlayerMovement.TakeDamage(1);
                 oldPlayerPos = player.transform.position;
                 Invoke("Retreat", 1f);
                 done_Attack = true;
@@ -137,6 +132,13 @@ public class _AI : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().sortingOrder = 1;
             }
+
+            if(transform.localScale.x <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+
+
         }
     }
 
@@ -150,9 +152,4 @@ public class _AI : MonoBehaviour
         aiAnim.SetBool("Attack", false);
     }
 
-    void TakeDamage(int damage) 
-    {
-        currentHealth -= damage;
-        playerHealth.SetHealth(currentHealth);
-    }
 }

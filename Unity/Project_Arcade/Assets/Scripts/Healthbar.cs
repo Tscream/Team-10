@@ -11,14 +11,11 @@ public class Healthbar : MonoBehaviour
     public Gradient gradient;
     public Image fill;
 
-
-
     private void Update()
     {
         if(sliderhealth.value == 0)
         {
-            Debug.Log("No health");
-            SceneManager.LoadScene("Luuk_Test"); //dit moet veranderen naar wat we gaan doen voor de death scene, maar laat het hier staan want dit werkt. 
+            SceneManager.LoadScene("Deadth"); //dit moet veranderen naar wat we gaan doen voor de death scene, maar laat het hier staan want dit werkt. 
         }
     }
 

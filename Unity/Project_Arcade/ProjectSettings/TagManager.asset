@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CamL
   - CamR
+  - Marco
   layers:
   - Default
   - TransparentFX

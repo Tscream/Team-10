@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -10,6 +8,7 @@ public class Menu : MonoBehaviour
 {
     public GameObject login;
     public GameObject play;
+    public GameObject quitButton;
     public GameObject control;
     public GameObject button;
     public GameObject trein_vertrekt;
@@ -21,28 +20,25 @@ public class Menu : MonoBehaviour
     public Text tijdObject;
     static public bool begin;
     public static bool pauze;
-    public static float tijd; 
-
-
-
+    public static int tijd; 
 
     void Start()
     {
         pauze = true;
-        tijd = 120; // je hebt 120 seconde (2 minuten) de tijd
-        
+        begin = false;
+        tijd = 10; // je hebt 120 seconde (2 minuten) de tijd
     }
 
     private void FixedUpdate()
     {
-        if (begin == true)
+        if (begin == true && start_menu != null)
         {
             start_menu.transform.Translate(0, -5, 0);
         }
 
-        if (start_menu.transform.position.y <= -225 && start_menu != null)
+        if (start_menu != null && start_menu.transform.position.y <= -225)
         {
-            start_menu.SetActive(false);
+            Destroy(start_menu);
             pauze = false;
             StartCoroutine(Timer());
         }
@@ -66,11 +62,8 @@ public class Menu : MonoBehaviour
             main_menuknop.SetActive(false);
         }
 
-
-
         string minutes = ((int)tijd / 60).ToString("f0").PadLeft(2,'0'); // format de string van een decimaal getal naar een die je op een klok ziet
         string seconds = (tijd % 60).ToString("f0").PadLeft(2, '0');
-
 
         tijdObject.text = minutes + ":" + seconds; //update te text met de tijd
 
@@ -82,7 +75,7 @@ public class Menu : MonoBehaviour
         button.SetActive(true);
         login.SetActive(false);
         play.SetActive(false);
-        button_but_red.SetActive(false);
+        quitButton.SetActive(false);
     }
 
     public void Button()
@@ -90,10 +83,9 @@ public class Menu : MonoBehaviour
         control.SetActive(false);
         button.SetActive(false);
         trein_vertrekt.SetActive(true);
+        button_but_red.SetActive(true);
         Invoke("Treinmelding", 3f);
     }
-
-
 
     void Treinmelding()
     {
@@ -128,10 +120,18 @@ public class Menu : MonoBehaviour
 
     private IEnumerator Timer()
     {
-        while (pauze == false)
+        while (pauze == false && tijd > 0)
         {
             yield return new WaitForSeconds(1f); // zo lang als dat pauze false is haalt hij iedere seconde 1 van de tijd af
             tijd--;
+        }
+
+        while (pauze == false && tijd == 0)
+        {
+            tijdObject.gameObject.SetActive(false);
+            yield return new WaitForSeconds(1f);
+            tijdObject.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
         }
     }
 }

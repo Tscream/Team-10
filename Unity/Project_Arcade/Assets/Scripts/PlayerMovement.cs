@@ -18,12 +18,19 @@ public class PlayerMovement : MonoBehaviour
     SpriteRenderer sr;
     public static bool rechts;
     public static bool links;
+    public GameObject marco;
+    bool spawn;
+    float cooldown = 2f;
+    static int currentHealth = 10;
+    static Healthbar playerHealth;
 
     void Start()
     {
         plAnim = gameObject.GetComponent<Animator>();
         sr = gameObject.GetComponent<SpriteRenderer>();
         staminaBar = GameObject.Find("Canvas/Staminabar/Fill").GetComponent<RectTransform>();
+        playerHealth = GameObject.Find("Canvas/Healthbar").GetComponent<Healthbar>();
+
     }
 
     void FixedUpdate()
@@ -101,27 +108,46 @@ public class PlayerMovement : MonoBehaviour
                 doneAttack = true;
             }
 
-           
-            if(transform.position.x == 33 && Menu.tijd > 0) // op tijd
+            if(transform.position.x >= 33 && Menu.tijd > 0) // op tijd
             {
-                SceneManager.LoadScene("Luuk_Test");
-                Debug.Log("feest");
+                SceneManager.LoadScene("Win");
             }
 
-            if (transform.position.x == 33 && Menu.tijd <= 0) // te laat
+            if (transform.position.x >= 33 && Menu.tijd <= 0) // te laat
             {
-                SceneManager.LoadScene("Luuk_Test"); 
+                SceneManager.LoadScene("Time");
             }
 
-            staminaBar.localScale = new Vector3(staminaFill, 1, 1); // pakt de scale van de stamina bar en maakt daar de stamina float van
+            
+            staminaBar.localScale = new Vector3(staminaFill, 1, 1); // pakt de scale van de stamina bar en maakt daar de stamina float va
+
+            if (transform.position.x >= -6)
+            {
+                spawn = true;
+            }
+            else
+            {
+                spawn = false;
+            }
+
+            if (Time.time > cooldown && spawn == true)
+            {
+                Instantiate(marco, new Vector3(transform.position.x + 15, transform.position.y, transform.position.z), Quaternion.identity);
+                cooldown = Time.time + Random.Range(5, 10);
+            }
         }
     }
-
 
     void Attack()
     {
         plAnim.SetBool("Attack", false);
         doneAttack = false;
+    }
+
+    public static void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        playerHealth.SetHealth(currentHealth);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -134,6 +160,11 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "CamL")
         {
             links = true;
+        }
+
+        if(collision.tag == "Marco")
+        {
+            TakeDamage(3);
         }
     }
 
@@ -148,5 +179,6 @@ public class PlayerMovement : MonoBehaviour
         {
             links = false;
         }
+
     }
 }
